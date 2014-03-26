@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python2
 import os
 
 from pdfminer.pdfparser import PDFParser
@@ -14,15 +14,3 @@ with open(os.path.join('transcripts','original.pdf'), 'rb') as fp:
     # Create a PDF document object that stores the document structure.
     # Supply the password for initialization.
     document = PDFDocument(parser)
-    # Check if the document allows text extraction. If not, abort.
-    if not document.is_extractable:
-        raise PDFTextExtractionNotAllowed
-    # Create a PDF resource manager object that stores shared resources.
-    rsrcmgr = PDFResourceManager()
-    # Create a PDF device object.
-    device = PDFDevice(rsrcmgr)
-    # Create a PDF interpreter object.
-    interpreter = PDFPageInterpreter(rsrcmgr, device)
-    # Process each page contained in the document.
-    for page in PDFPage.create_pages(document):
-        interpreter.process_page(page)
